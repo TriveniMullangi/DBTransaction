@@ -16,7 +16,7 @@ let User2 = mariaConnection.define('user2', {
         freezeTableName: true, // Model tableName will be the same as the model name
         tableName: 'user2'
     });
-////
+//comment
     module.exports = {
 
         User2 : User2
