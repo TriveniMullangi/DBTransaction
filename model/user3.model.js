@@ -4,12 +4,14 @@ var mariaConnection = require('../connection/transaction.connection');
 
 let User3 = mariaConnection.define('user3', {
     id:{
-        type: sequelize.INTEGER,
-        autoIncrement: true,
-        primaryKey: true
-},
+       type: sequelize.INTEGER,
+       primaryKey:true
+    },
     firstName:sequelize.STRING,
-    lastName: sequelize.STRING
+    lastName: sequelize.STRING,
+    city: sequelize.STRING,
+    state: sequelize.STRING,
+    country: sequelize.STRING
    
 }, {
         timestamps: false,

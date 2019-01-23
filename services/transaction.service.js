@@ -12,22 +12,42 @@ const db = new sequelize('dbtransactions', 'miracle1', 'miracle1@', {
     operatorsAliases:false
   })
 var addUser = async (req, res, next) => {
+    
+    // console.log(a)
     console.log("URL hit to :", req.hostname, req.originalUrl);
     logger.info("Entered into adding new user service");
-    let transaction;
+    //let transaction;
     try {
-                transaction = await  db.transaction();
-                let data1 = await user1Model.User1.create(req.body,transaction)
-                 let data2 = await user2Model.User2.create({firstName:"fjdhf"},transaction)
-                let data3 = await user3Model.User3.create({firstName:"fjdhf"},transaction)
-                await transaction.commit()
-                res.send("committed")
+      return  db.transaction((t)=>{
+            return user1Model.User1.create(req.body,{ transaction:t})
+            .then(function (user) {
+            //    // console.log(user.id)
+            //     console.log("inserted in 1st table")
+            //     console.log(JSON.stringify(user))
+            throw new Err("hi")
+            // return  user2Model.User2.create({
+            //     id:user.id,
+            //     firstName:user.firstName,
+            //     lastName:user.lastName,
+            //     city: user.city,
+            //     state:user.state,
+            //     country:user.country    
+            //   },{ transaction:t})
+            });
+            
+        }) .then(function (result) {
+            //transaction.commit();
+            res.send("successfully inserted in 2 tables")
+          }).catch(()=>{
+           // t.rollback()
+            res.send("rolled back")
+          })
+        
     }
 
     catch(err)
     {
-        await transaction.rollback()
-        res.send("rolled back")
+        next(err)
     }
 }
 

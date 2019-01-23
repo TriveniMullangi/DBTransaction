@@ -6,12 +6,13 @@ var mariaConnection = require('../connection/transaction.connection');
 let User1 = mariaConnection.define('user1', {
     id:{
         type: sequelize.INTEGER,
-        autoIncrement: true,
-        primaryKey: true
-      },
+        primaryKey:true
+     },
     firstName:sequelize.STRING,
-    lastName: sequelize.STRING
-   
+    lastName: sequelize.STRING,
+    city: sequelize.STRING,
+    state: sequelize.STRING,
+    country: sequelize.STRING
 }, {
         timestamps: false,
         freezeTableName: true, // Model tableName will be the same as the model name
