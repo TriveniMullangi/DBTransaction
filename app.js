@@ -33,11 +33,11 @@ app.use((err,req,res,next)=>{
     if (err.name == "SequelizeDatabaseError") {
       // console.log("Invalid Column Name");
       var errorMessage = {
-        "statusCode": 404,
+        "statusCode": 400,
         "info": "Invalid Column Name / Check DB Columns",
-        "error": err
+        "error": err.parent.sqlMessage
       };
-      res.status(404).send(errorMessage);
+      res.status(400).send(errorMessage);
     }
     //DB Credentials Error
     else if (err.name == "SequelizeAccessDeniedError") {
@@ -90,7 +90,8 @@ app.use((err,req,res,next)=>{
     }
     //500 Error
     else {
-      res.status(500).send(err);
+      res.status(500).send({
+       Error: err.message});
     }
   }
 
