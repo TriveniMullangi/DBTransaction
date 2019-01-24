@@ -90,8 +90,10 @@ app.use((err,req,res,next)=>{
     }
     //500 Error
     else {
-      res.status(500).send({
-       Error: err.message});
+      res.status(400).send({
+      "statusCode": 400,
+      "Info":"manually thrown error",
+      "Error": err.message});
     }
   }
 
