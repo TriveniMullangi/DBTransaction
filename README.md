@@ -14,4 +14,3 @@ ACID(Atomicity, Consistency, Isolation, and Durability) properties.
 - And one which leaves committing, rolling back and passing the transaction to the user.
 The key difference is that the managed transaction uses a callback that expects a promise to be returned to it while the unmanaged transaction returns a promise.
 
--
